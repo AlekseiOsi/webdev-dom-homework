@@ -52,6 +52,7 @@ let currentDate = new Date();
         <div class="likes">
           <span class="likes-counter"></span>
           <button class="like-button"></button>
+          <button class="delete-button">Удалить</button>
         </div>
       </div>
     </li>`;
