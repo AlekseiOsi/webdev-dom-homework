@@ -5,12 +5,30 @@ const nameInputElement = document.getElementById("name-input");
 const textInputElement = document.getElementById("text-input");
 const deleteButtonElement = document.getElementById("delete-button");
 const buttonLikes = document.querySelectorAll(".like-button");
-    
-for (const buttonLike of buttonLikes) {
-    buttonLike.addEventListener('click', () => {
-        console.log(1);
-    })
+const numberLikes = document.querySelectorAll(".likes-counter")
+
+
+
+const initEventListeners = () => {
+    const buttonLikes = document.querySelectorAll(".like-button");
+    for (const buttonLike of buttonLikes) {
+        buttonLike.addEventListener('click', () => {
+            console.log(1);
+        });
+    };
 };
+
+const initDeleteButtonsListener = () => {
+  const deleteButtonsElements = document.querySelectorAll(".delete-button");
+  for (const deleteButtonElement of deleteButtonsElements){
+    deleteButtonElement.addEventListener('click', () => {
+console.log('Удаляю объект');
+    });
+  };
+};
+
+initEventListeners();
+initDeleteButtonsListener();
 
 let currentDate = new Date();
 buttonElement.addEventListener('click', () => {
@@ -45,6 +63,44 @@ buttonElement.addEventListener('click', () => {
     let currentDate = new Date();
 
 
+    const comments = [ {
+      name: "Глеб Фокин",
+      text: "Это будет первый комментарий на этой странице",
+    },
+    {
+      name: "Варвара Н.",
+      text: "Мне нравится как оформлена эта страница! ❤",
+    },
+    ];
+    
+    
+    const renderComments = () => {
+      const commentsHtml = comments.map((comment) => {
+        return  `<li class="comment">
+        <div class="comment-header">
+          <div>${comment.name}</div>
+          <div>${formatDate(currentDate)}</div>
+        </div>
+        <div class="comment-body">
+          <div class="comment-text">
+            ${comment.text}
+          </div>
+        </div>
+        <div class="comment-footer">
+          <div class="likes">
+            <span class="likes-counter"></span>
+            <button class="like-button"></button>
+            <button class="delete-button">Удалить</button>
+          </div>
+        </div>
+      </li>`
+      }).join('');
+
+      commentElement.innerHTML = commentsHtml;
+    };
+    
+    renderComments();
+
     const oldCommentHtml = commentElement.innerHTML;
     commentElement.innerHTML = oldCommentHtml + `    <li class="comment">
       <div class="comment-header">
@@ -65,11 +121,6 @@ buttonElement.addEventListener('click', () => {
       </div>
     </li>`;
 
-    const buttonLikes = document.querySelectorAll(".like-button");
-    for (const buttonLike of buttonLikes) {
-        buttonLike.addEventListener('click', () => {
-            console.log(1);
-        })
-    }
-
+    initEventListeners();
+    initDeleteButtonsListener();
 });
